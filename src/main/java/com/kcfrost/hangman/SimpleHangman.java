@@ -67,8 +67,6 @@ public class SimpleHangman {
 
             attemptsTracker++;
         }
-        
-        userInput.close();
 
         System.out.println();
         if (solved == true) {
@@ -81,6 +79,14 @@ public class SimpleHangman {
             System.out.println("Try again next time!");
         }
        
+        System.out.print("Define word? Press any key to quit: ");
+        String choice = userInput.nextLine();
+
+        if (choice.isEmpty()) {
+            System.out.println(defineWord(secretWord));
+        }
+
+        userInput.close();
     }
 
     public static boolean isCorrect(char guess, String word) {
@@ -93,20 +99,38 @@ public class SimpleHangman {
 
         return false;
     }
+    
+    public static JSONArray getSiteBody(String site) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .GET()
+            .uri(URI.create(site))
+            .timeout(Duration.ofSeconds(60))
+            .build();
+
+        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+
+        return new JSONArray(response.body());
+    }
 
     public static String generateRandomWord() throws IOException, InterruptedException {
         final String randomWordSite = "https://random-word-api.herokuapp.com/word";
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .GET()
-            .uri(URI.create(randomWordSite))
-            .timeout(Duration.ofSeconds(60))
-            .build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        JSONArray response = getSiteBody(randomWordSite);
 
-        JSONArray jsonWord = new JSONArray(response.body());
-
-        return jsonWord.getString(0);
+        return response.getString(0);
     }
+
+    public static String defineWord(String word) throws IOException, InterruptedException {
+        StringBuilder dictionarySite = new StringBuilder("https://api.dictionaryapi.dev/api/v2/entries/en/");
+        dictionarySite.append(word);
+
+        JSONArray response = getSiteBody(dictionarySite.toString());
+
+        // fix this
+        String wordDefinition = response.getJSONObject(0).getJSONArray("meanings").getJSONObject(0).getJSONArray("definitions").getJSONObject(0).getString("definition");
+
+        return String.format("The word %s means %s", word, wordDefinition);
+    }
+
 }

@@ -89,6 +89,9 @@ public class SimpleHangman {
         userInput.close();
     }
 
+    public static void startMenu(Scanner userInput) {
+        
+    }
     public static boolean isCorrect(char guess, String word) {
         for (char ch : word.toCharArray()) {
             if (guess == ch) {
@@ -113,10 +116,14 @@ public class SimpleHangman {
         return new JSONArray(response.body());
     }
 
-    public static String generateRandomWord() throws IOException, InterruptedException {
-        final String randomWordSite = "https://random-word-api.herokuapp.com/word";
+    public static String generateRandomWord(int wordLength) throws IOException, InterruptedException {
+        StringBuilder randomWordSite = new StringBuilder("https://random-word-api.herokuapp.com/word");
 
-        JSONArray response = getSiteBody(randomWordSite);
+        if (wordLength > 0) {
+            randomWordSite.append("?length" + wordLength);
+        }
+
+        JSONArray response = getSiteBody(randomWordSite.toString());
 
         return response.getString(0);
     }
@@ -126,6 +133,9 @@ public class SimpleHangman {
         dictionarySite.append(word);
 
         JSONArray response = getSiteBody(dictionarySite.toString());
+
+        // gets first definition in JSON file
+        // goal: eventually be able to iterate through all definitions
 
         String wordDefinition = response.getJSONObject(0).getJSONArray("meanings").getJSONObject(0).getJSONArray("definitions").getJSONObject(0).getString("definition");
 

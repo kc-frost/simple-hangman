@@ -87,7 +87,8 @@ public class SimpleHangman {
             System.out.println("Too bad, the word was '" + secretWord + "'");
             System.out.println("Try again next time!");
         }
-       
+        
+        System.out.println();
         System.out.print("Define word? Press any key to quit: ");
         String choice = userInput.nextLine();
 

@@ -14,8 +14,17 @@ import org.json.JSONArray;
 public class SimpleHangman {
     public static void main( String[] args ) throws IOException, InterruptedException {
         Scanner userInput = new Scanner(System.in);
-        
-        String secretWord = generateRandomWord();
+
+        String secretWord;
+        String possibleLength = difficultySelect(userInput);
+        if (!possibleLength.isEmpty()) {
+            secretWord = generateRandomWord(possibleLength);
+        }
+
+        else{
+            secretWord = generateRandomWord("0");
+        }
+
         StringBuilder displayWord = new StringBuilder("_".repeat(secretWord.length()));
         HashSet<String> pastGuesses = new HashSet<String>();
         
@@ -78,7 +87,8 @@ public class SimpleHangman {
             System.out.println("Too bad, the word was '" + secretWord + "'");
             System.out.println("Try again next time!");
         }
-       
+        
+        System.out.println();
         System.out.print("Define word? Press any key to quit: ");
         String choice = userInput.nextLine();
 
@@ -89,6 +99,15 @@ public class SimpleHangman {
         userInput.close();
     }
 
+    public static String difficultySelect(Scanner userInput) {
+        System.out.println("Simple Hangman\n");
+
+        System.out.println("[Enter] to start");
+        System.out.print("or, enter a number [2-7] to set difficulty (controls word length): ");
+
+        return userInput.nextLine();
+        
+    }
     public static boolean isCorrect(char guess, String word) {
         for (char ch : word.toCharArray()) {
             if (guess == ch) {
@@ -113,10 +132,14 @@ public class SimpleHangman {
         return new JSONArray(response.body());
     }
 
-    public static String generateRandomWord() throws IOException, InterruptedException {
-        final String randomWordSite = "https://random-word-api.herokuapp.com/word";
+    public static String generateRandomWord(String wordLength) throws IOException, InterruptedException {
+        StringBuilder randomWordSite = new StringBuilder("https://random-word-api.herokuapp.com/word");
 
-        JSONArray response = getSiteBody(randomWordSite);
+        if (Integer.parseInt(wordLength) > 0) {
+            randomWordSite.append("?length=" + wordLength);
+        }
+
+        JSONArray response = getSiteBody(randomWordSite.toString());
 
         return response.getString(0);
     }
@@ -126,6 +149,9 @@ public class SimpleHangman {
         dictionarySite.append(word);
 
         JSONArray response = getSiteBody(dictionarySite.toString());
+
+        // gets first definition in JSON file
+        // goal: eventually be able to iterate through all definitions
 
         String wordDefinition = response.getJSONObject(0).getJSONArray("meanings").getJSONObject(0).getJSONArray("definitions").getJSONObject(0).getString("definition");
 

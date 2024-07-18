@@ -14,8 +14,17 @@ import org.json.JSONArray;
 public class SimpleHangman {
     public static void main( String[] args ) throws IOException, InterruptedException {
         Scanner userInput = new Scanner(System.in);
-        
-        String secretWord = generateRandomWord();
+
+        String secretWord;
+        String possibleLength = startMenu(userInput);
+        if (!possibleLength.isEmpty()) {
+            secretWord = generateRandomWord(possibleLength);
+        }
+
+        else{
+            secretWord = generateRandomWord("0");
+        }
+
         StringBuilder displayWord = new StringBuilder("_".repeat(secretWord.length()));
         HashSet<String> pastGuesses = new HashSet<String>();
         
@@ -89,7 +98,13 @@ public class SimpleHangman {
         userInput.close();
     }
 
-    public static void startMenu(Scanner userInput) {
+    public static String startMenu(Scanner userInput) {
+        System.out.println("Simple Hangman\n");
+
+        System.out.println("[Enter] to start");
+        System.out.print("or, enter a number [2-7] to set difficulty (controls word length): ");
+
+        return userInput.nextLine();
         
     }
     public static boolean isCorrect(char guess, String word) {
@@ -116,11 +131,11 @@ public class SimpleHangman {
         return new JSONArray(response.body());
     }
 
-    public static String generateRandomWord(int wordLength) throws IOException, InterruptedException {
+    public static String generateRandomWord(String wordLength) throws IOException, InterruptedException {
         StringBuilder randomWordSite = new StringBuilder("https://random-word-api.herokuapp.com/word");
 
-        if (wordLength > 0) {
-            randomWordSite.append("?length" + wordLength);
+        if (Integer.parseInt(wordLength) > 0) {
+            randomWordSite.append("?length=" + wordLength);
         }
 
         JSONArray response = getSiteBody(randomWordSite.toString());

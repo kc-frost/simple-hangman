@@ -16,7 +16,7 @@ public class SimpleHangman {
         Scanner userInput = new Scanner(System.in);
 
         String secretWord;
-        String possibleLength = startMenu(userInput);
+        String possibleLength = difficultySelect(userInput);
         if (!possibleLength.isEmpty()) {
             secretWord = generateRandomWord(possibleLength);
         }
@@ -98,7 +98,7 @@ public class SimpleHangman {
         userInput.close();
     }
 
-    public static String startMenu(Scanner userInput) {
+    public static String difficultySelect(Scanner userInput) {
         System.out.println("Simple Hangman\n");
 
         System.out.println("[Enter] to start");

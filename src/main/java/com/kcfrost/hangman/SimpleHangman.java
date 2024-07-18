@@ -127,10 +127,9 @@ public class SimpleHangman {
 
         JSONArray response = getSiteBody(dictionarySite.toString());
 
-        // fix this
         String wordDefinition = response.getJSONObject(0).getJSONArray("meanings").getJSONObject(0).getJSONArray("definitions").getJSONObject(0).getString("definition");
 
-        return String.format("The word %s means %s", word, wordDefinition);
+        return String.format("%s definition: %s", word, wordDefinition);
     }
 
 }

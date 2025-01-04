@@ -9,16 +9,17 @@ import com.github.kcfrost.visuals.Hangman;
 import com.github.kcfrost.visuals.Screen;
 
 public class Game {
+
+    public static Word wd = new Word();
+    public static Mechanics mc = new Mechanics(wd);
+    public static int wordLength = wd.getLength();
+
     public static void main(String[] args) {        
         Scanner scan = new Scanner(System.in);
 
-        boolean isGameOver = false;
-        
-        Word wd = new Word();
-        Mechanics mc = new Mechanics(wd);
-        int wordLength = wd.getLength();
- 
         while (true) {    
+            boolean isGameOver = false;
+            
             startUp();
             Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
                                 Mechanics.getHintSwitch());
@@ -42,16 +43,8 @@ public class Game {
                 case "1":
                     // restarts the game if player already played previously
                     if (isGameOver) {
-                        if (wordLength == 7) {
-                            wd = new Word();
-                        } else {
-                            wd = new Word(wordLength, Mechanics.getDefinitionSwitch());
-                        }
-
-                        mc = new Mechanics(wd);
-                        wordLength = wd.getLength();
+                        restartGame(wordLength);
                         isGameOver = false;
-                        Hangman.restart();
                     }
 
                     while ((!isGameOver)) {
@@ -80,12 +73,10 @@ public class Game {
                             }
 
                             if (input.equals("/R")) {
-                                wd = new Word();
-                                mc = new Mechanics(wd);
-                                wordLength = wd.getLength();
-                                Hangman.restart();
+                                restartGame(wordLength);
                                 continue;
                             } else if (input.equals(Choices.INGAME_QUIT)) {
+                                restartGame(wordLength);
                                 break;
                             }
                         }
@@ -132,8 +123,9 @@ public class Game {
                     } while (true);
                     
                     wordLength = newWordLength;
-                    wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
-                    mc = new Mechanics(wd);
+                    // wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
+                    // mc = new Mechanics(wd);
+                    restartGame(newWordLength);
 
                     break;
 
@@ -197,6 +189,12 @@ public class Game {
         for (int i = 0; i <= 20; i++) {
             System.out.println();
         }
+    }
+
+    public static void restartGame(int newWordLength) {
+        wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
+        mc = new Mechanics(wd);
+        Hangman.restart();
     }
 
 }

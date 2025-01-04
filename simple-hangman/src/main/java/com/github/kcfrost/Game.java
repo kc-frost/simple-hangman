@@ -1,6 +1,5 @@
 package com.github.kcfrost;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 import com.github.kcfrost.utils.Choices;
@@ -13,39 +12,42 @@ public class Game {
     public static void main(String[] args) {        
         Scanner scan = new Scanner(System.in);
 
-        // HashMap<String, Object> x = setX();
-
-        startUp();
-        Screen.startMenu();
-        
-        System.out.println();
-        System.out.print("Enter (case-insensitive) input: ");
-        String input = scan.nextLine().toUpperCase();
-
-        // while user input isnt in the first options
-        while (!Choices.isStartChoice(input)) {
-            refreshScreen();
-            startUp();
-            Screen.startMenu();
-
-            System.out.println();
-            System.out.print("Invalid choice. Please pick again: ");
-            input = scan.nextLine().toUpperCase();
-        }
-
-        boolean inputNotQuit = (!input.equals(Choices.QUIT));
         boolean isGameOver = false;
         
         Word wd = new Word();
         Mechanics mc = new Mechanics(wd);
         int wordLength = wd.getLength();
+ 
+        while (true) {    
+            startUp();
+            Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
+                                Mechanics.getHintSwitch());
+            
+            System.out.println();
+            System.out.print("Enter (case-insensitive) input: ");
+            String input = scan.nextLine().toUpperCase();
 
-        while ((inputNotQuit)) {    
+            while (!Choices.isStartChoice(input)) {
+                refreshScreen();
+                startUp();
+                Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
+                                Mechanics.getHintSwitch());
+    
+                System.out.println();
+                System.out.print("Invalid choice. Please pick again: ");
+                input = scan.nextLine().toUpperCase();
+            }
+
             switch (input) {
                 case "1":
                     // restarts the game if player already played previously
                     if (isGameOver) {
-                        wd = new Word();
+                        if (wordLength == 7) {
+                            wd = new Word();
+                        } else {
+                            wd = new Word(wordLength, Mechanics.getDefinitionSwitch());
+                        }
+
                         mc = new Mechanics(wd);
                         wordLength = wd.getLength();
                         isGameOver = false;
@@ -155,24 +157,15 @@ public class Game {
                     break;
             }
 
-            refreshScreen();
-            Hangman.status();
-            Screen.divider();
-            
             if (isGameOver) {
+                refreshScreen();
+                Hangman.status();
+                Screen.divider();
                 Screen.endMenu(mc.gameResult(Hangman.getMistakesCount()), wd, mc);
+                System.out.println();
+                System.out.print("Enter (case-insensitive) input: ");
+                input = scan.nextLine().toUpperCase();
 
-            } else {
-                startUp();
-                Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
-                                Mechanics.getHintSwitch());
-            }
-
-            System.out.println();
-            System.out.print("Enter (case-insensitive) input: ");
-            input = scan.nextLine().toUpperCase();
-
-            if (isGameOver) {
                 while (!Choices.isEndChoice(input)) {
                     refreshScreen();
                     Hangman.status();
@@ -183,27 +176,11 @@ public class Game {
                     System.out.print("Invalid choice. Please pick again: ");
                     input = scan.nextLine().toUpperCase();
                 }
-
-                if (input.equals("A")) {
-                    input = "1";
-                }
-
-                isGameOver = false; // TODO Don't leave it like this
-
+             } 
+            
+            if (input.equals(Choices.QUIT)) {
+                break;
             }
-
-            while (!Choices.isStartChoice(input)) {
-                refreshScreen();
-                startUp();
-                Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
-                                Mechanics.getHintSwitch());
-    
-                System.out.println();
-                System.out.print("Invalid choice. Please pick again: ");
-                input = scan.nextLine().toUpperCase();
-            }
-
-            inputNotQuit = (!input.equals(Choices.QUIT));
             
         }
         
@@ -222,14 +199,4 @@ public class Game {
         }
     }
 
-    public static HashMap<String, Object> setX() {
-        HashMap<String, Object> placeholderMap = new HashMap<>();
-        Word wd = new Word();
-        Mechanics mc = new Mechanics(wd);
-        
-        placeholderMap.put("wd", wd);
-        placeholderMap.put("mc", mc);
-        
-        return placeholderMap;
-    }
 }

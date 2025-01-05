@@ -134,14 +134,6 @@ public class Game {
                     break;
                 
                 case "5":
-                    // if option 5: open scoreboard (for that gameplay session)
-                    // no input is asked here
-                    // scoreboard is just a table of 'scores' 
-                    // where scores is the amount of tries per game
-                    // listed in descending order
-                    // a max of 10 are shown at a time
-                        // USE A QUEUE aka FIFO
-                        // when you push the 11th score, pop the 1st score
                     break;
             }
 

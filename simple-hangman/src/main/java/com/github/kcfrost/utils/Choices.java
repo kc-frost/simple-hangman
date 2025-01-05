@@ -21,7 +21,8 @@ public class Choices {
                             "X", "Y", "Z");
 
     /** 
-     * {@return  if <code>START_CHOICES</code> contains <code>input</code>}
+     * {@return <code>true</code> iff the list <code>START_CHOICES</code> 
+     * contains <code>input</code>}
      * 
      * @param  input     the <code>String</code> to check, typically has a length of 1
      */
@@ -30,7 +31,8 @@ public class Choices {
     }
 
     /**
-     * {@return if <code>INGAME_CHOICES</code> contains <code>input</code>}
+     * {@return <code>true</code> iff the list <code>INGAME_CHOICES</code> 
+     * contains <code>input</code>}
      * 
      * @param  input    the <code>String</code> to check, typically has length of 2
      */
@@ -39,7 +41,8 @@ public class Choices {
     }
 
     /**
-     * {@return if <code>END_CHOICES</code> contains <code>input</code>}
+     * {@return <code>true</code> iff the list <code>END_CHOICES</code> 
+     * contains <code>input</code>}
      * 
      * @param  input    the <code>String</code> to check, typically has a length of 1
      */

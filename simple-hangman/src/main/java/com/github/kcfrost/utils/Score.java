@@ -1,9 +1,8 @@
 package com.github.kcfrost.utils;
 
 public class Score {
-    private static final int PER_HINT_PENALTY = 2;
-    private static final int PER_MISTAKE_PENALTY = 1;
-    // something about a treemap for difficultymultiplier
+    private static final int PER_HINT_PENALTY = -2;
+    private static final int PER_MISTAKE_PENALTY = -1;
 
     private int baseScore;
     private int accuracyBonus;
@@ -11,9 +10,10 @@ public class Score {
     private int mistakesMade;
     private int difficultyMultiplier;
 
-    public Score(int baseScore, int accuracyBonus, int hintsUsed, int mistakesMade) {
+    public Score(int baseScore, int attemptsMade, int hintsUsed, int mistakesMade) {
         this.baseScore = baseScore;
-        this.accuracyBonus = accuracyBonus;
+        this.accuracyBonus = (baseScore * 100)/attemptsMade;  
+        // this is getting hintsLeft, so its messing with the math
         this.hintsUsed = hintsUsed;
         this.mistakesMade = mistakesMade;
         this.difficultyMultiplier = getDifficultyMultiplier(baseScore);

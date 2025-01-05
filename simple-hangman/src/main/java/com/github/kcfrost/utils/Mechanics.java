@@ -9,8 +9,6 @@ import java.util.Random;
 public class Mechanics {
     private static final int MAX_HINTS = 3;
 
-    // implement scoreboard
-
     private static boolean definitionSwitch = false;
     private static boolean hintSwitch = false;
     private static Random rand = new Random();
@@ -30,14 +28,14 @@ public class Mechanics {
     
     public String giveHint() {
         if (!hintSwitch) {
-            // System.out.print("\nHints aren't enabled!");
             return "\nHints aren't enabled!";
         }
         
         if (hintsLeft == 0) {
-            // System.out.print("\nYou've exhausted your hints!");
             return "\nYou've exhausted your hints!";
         }
+        
+        // TODO clear up this explanation
         
         // from a list of all unguessed characters, pick a random one and replace the * in 
         // censoredWord that has the random letter

@@ -41,7 +41,6 @@ public class Game {
 
             switch (input) {
                 case "1":
-                    // restarts the game if player already played previously
                     if (isGameOver) {
                         restartGame(wordLength);
                         isGameOver = false;
@@ -89,7 +88,6 @@ public class Game {
                         
                         isGameOver = mc.gameState(Hangman.getMistakesCount()); 
 
-                         // every single thing above this is horrendous
                     }
 
                     break;
@@ -123,8 +121,6 @@ public class Game {
                     } while (true);
                     
                     wordLength = newWordLength;
-                    // wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
-                    // mc = new Mechanics(wd);
                     restartGame(newWordLength);
 
                     break;

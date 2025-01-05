@@ -1,9 +1,11 @@
 package com.github.kcfrost;
-
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 import com.github.kcfrost.utils.Choices;
 import com.github.kcfrost.utils.Mechanics;
+import com.github.kcfrost.utils.Score;
 import com.github.kcfrost.utils.Word;
 import com.github.kcfrost.visuals.Hangman;
 import com.github.kcfrost.visuals.Screen;
@@ -13,6 +15,7 @@ public class Game {
     public static Word wd = new Word();
     public static Mechanics mc = new Mechanics(wd);
     public static int wordLength = wd.getLength();
+    public static Queue<Score> scoreboard = new LinkedList<>();
 
     public static void main(String[] args) {        
         Scanner scan = new Scanner(System.in);

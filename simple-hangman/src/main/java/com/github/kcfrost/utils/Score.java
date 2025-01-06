@@ -12,9 +12,10 @@ public class Score {
 
     public Score(int baseScore, int attemptsMade, int hintsUsed, int mistakesMade) {
         this.baseScore = baseScore;
-        this.accuracyBonus = (baseScore * 100)/attemptsMade;  
-        // this is getting hintsLeft, so its messing with the math
-        this.hintsUsed = hintsUsed;
+        this.accuracyBonus = (baseScore * 100)/attemptsMade;
+
+        this.hintsUsed = getHintsUsed(hintsUsed);
+        
         this.mistakesMade = mistakesMade;
         this.difficultyMultiplier = getDifficultyMultiplier(baseScore);
     }
@@ -34,8 +35,23 @@ public class Score {
         } else if (wordLength >= 12 && wordLength <= 15) {
             return 6;
         } else {
-            // TODO Fix this 
+            // TODO Find a better way to write this
             return 0;
+        }
+    }
+
+    private int getHintsUsed(int hintsLeft) {
+        if (hintsLeft == 3) {
+            return 0;
+        } else if (hintsLeft == 2) {
+            return 1;
+        } else if (hintsLeft == 1) {
+            return 2;
+        } else if (hintsLeft == 0) {
+            return 3;
+        } else {
+            // TODO Find a better way to write this too
+            return 0; 
         }
     }
 

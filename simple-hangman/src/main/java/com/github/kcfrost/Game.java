@@ -172,10 +172,16 @@ public class Game {
             // TODO maybe turn this into a method
             if (input.equals("S")) {
                 System.out.println("Below is scoreboard: (TESTING)");
+                int count = 1;
                 for (Integer element : scoreboard) {
-                    System.out.println(element);
+                    System.out.printf("Score %d: %d\n", count, element);
+                    count++;
                 }
+
+                System.out.print("Press [Enter] to return...");
+                scan.nextLine();
             }
+
             if (input.equals(Choices.QUIT)) {
                 break;
             }

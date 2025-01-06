@@ -15,7 +15,7 @@ public class Game {
     public static Word wd = new Word();
     public static Mechanics mc = new Mechanics(wd);
     public static int wordLength = wd.getLength();
-    public static Queue<Score> scoreboard = new LinkedList<>();
+    public static Queue<Integer> scoreboard = new LinkedList<>();
 
     public static void main(String[] args) {        
         Scanner scan = new Scanner(System.in);
@@ -137,6 +137,7 @@ public class Game {
                     break;
                 
                 case "5":
+                    System.out.println(scoreboard);
                     break;
             }
 
@@ -159,8 +160,22 @@ public class Game {
                     System.out.print("Invalid choice. Please pick again: ");
                     input = scan.nextLine().toUpperCase();
                 }
+
+                Score currentScore = new Score(wordLength, mc.getPastGuesses().size(), 
+                                    mc.getHintsLeft(), Hangman.getMistakesCount());
+                scoreboard.add(currentScore.getScore());
+                if (scoreboard.size() == 5) {
+                    scoreboard.poll();
+                }
              } 
             
+            // TODO maybe turn this into a method
+            if (input.equals("S")) {
+                System.out.println("Below is scoreboard: (TESTING)");
+                for (Integer element : scoreboard) {
+                    System.out.println(element);
+                }
+            }
             if (input.equals(Choices.QUIT)) {
                 break;
             }

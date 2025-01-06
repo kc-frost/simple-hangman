@@ -69,6 +69,20 @@ public class Screen {
         System.out.println(gameOverText);
     }
 
+    public static void scoreboardText() {
+        String scoreboardText = 
+            "\r\n" + 
+            "\r\n" + 
+            "                                _                         _        \r\n" + 
+            "                               | |                       | |       \r\n" + 
+            "  ______ ___  ___ ___  _ __ ___| |__   ___   __ _ _ __ __| |______ \r\n" + 
+            " |______/ __|/ __/ _ \\| '__/ _ \\ '_ \\ / _ \\ / _` | '__/ _` |______|\r\n" + 
+            "        \\__ \\ (_| (_) | | |  __/ |_) | (_) | (_| | | | (_| |       \r\n" + 
+            "        |___/\\___\\___/|_|  \\___|_.__/ \\___/ \\__,_|_|  \\__,_|       \r\n";
+
+        System.out.println(scoreboardText);
+    }
+
     public static void startMenu() { 
         int wordLengthDefault = 7;
         boolean[] startChoicesDefault = {false, false};

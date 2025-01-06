@@ -1,5 +1,7 @@
 package com.github.kcfrost.utils;
 
+import java.time.LocalTime;
+
 public class Score {
     private static final int PER_HINT_PENALTY = -2;
     private static final int PER_MISTAKE_PENALTY = -1;
@@ -9,6 +11,7 @@ public class Score {
     private int hintsUsed;
     private int mistakesMade;
     private int difficultyMultiplier;
+    private LocalTime time;
 
     public Score(int baseScore, int attemptsMade, int hintsUsed, int mistakesMade) {
         this.baseScore = baseScore;
@@ -18,6 +21,8 @@ public class Score {
         
         this.mistakesMade = mistakesMade;
         this.difficultyMultiplier = getDifficultyMultiplier(baseScore);
+
+        this.time = LocalTime.now();
     }
 
     public int getScore() {

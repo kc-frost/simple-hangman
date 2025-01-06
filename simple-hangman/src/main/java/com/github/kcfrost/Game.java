@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.github.kcfrost.utils.Choices;
 import com.github.kcfrost.utils.Mechanics;
 import com.github.kcfrost.utils.Score;
+import com.github.kcfrost.utils.Scoreboard;
 import com.github.kcfrost.utils.Word;
 import com.github.kcfrost.visuals.Hangman;
 import com.github.kcfrost.visuals.Screen;
@@ -137,7 +138,7 @@ public class Game {
                     break;
                 
                 case "5":
-                    System.out.println(scoreboard);
+                    Scoreboard.display();
                     break;
             }
 
@@ -163,23 +164,12 @@ public class Game {
 
                 Score currentScore = new Score(wordLength, mc.getPastGuesses().size(), 
                                     mc.getHintsLeft(), Hangman.getMistakesCount());
-                scoreboard.add(currentScore.getScore());
-                if (scoreboard.size() == 5) {
-                    scoreboard.poll();
-                }
+                Scoreboard.update(currentScore);
              } 
             
             // TODO maybe turn this into a method
             if (input.equals("S")) {
-                System.out.println("Below is scoreboard: (TESTING)");
-                int count = 1;
-                for (Integer element : scoreboard) {
-                    System.out.printf("Score %d: %d\n", count, element);
-                    count++;
-                }
-
-                System.out.print("Press [Enter] to return...");
-                scan.nextLine();
+                Scoreboard.display();
             }
 
             if (input.equals(Choices.QUIT)) {

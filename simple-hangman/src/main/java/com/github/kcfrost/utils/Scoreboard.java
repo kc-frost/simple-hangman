@@ -29,7 +29,6 @@ public class Scoreboard {
         
         System.out.print("\nPress any key to continue...");
         scan.nextLine();
-        // scan.close();
     }
 
 }

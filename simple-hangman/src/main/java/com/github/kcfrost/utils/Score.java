@@ -14,8 +14,6 @@ public class Score {
     private int difficultyMultiplier;
     private String time;
 
-   
-
     public Score(int baseScore, int attemptsMade, int hintsUsed, int mistakesMade) {
         this.baseScore = baseScore;
         this.accuracyBonus = (baseScore * 100)/attemptsMade;

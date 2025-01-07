@@ -194,7 +194,6 @@ public class Game {
         wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
         mc = new Mechanics(wd);
         Hangman.restart();
-        System.out.println("RESTARTED");
     }
 
 }

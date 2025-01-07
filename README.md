@@ -9,7 +9,7 @@ figure out the word in 7 tries or less!
 - [x] toggleables
     - word definitions
     - hints
-- [ ] scoreboard (last 10 scores)
+- [x] scoreboard (last 5 scores)
 - [ ] definitions
 
 ## images

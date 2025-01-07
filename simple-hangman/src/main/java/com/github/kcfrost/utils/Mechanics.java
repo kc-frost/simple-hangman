@@ -26,6 +26,11 @@ public class Mechanics {
         attemptsCount = 0;
     }
     
+    /**
+     * Randomly reveals an unguessed letter iff all preconditions are met. If at runtime <code>hintsLeft==0</code> or hints are left disabled, a custom message will be returned to print to the console.
+     * 
+     * @return A <code>String</code> message that is passed to <code>Screen.updateMessage()</code>
+     */
     public String giveHint() {
         if (!hintSwitch) {
             return "\nHints aren't enabled!";
@@ -35,12 +40,6 @@ public class Mechanics {
             return "\nYou've exhausted your hints!";
         }
         
-        // TODO clear up this explanation
-        
-        // from a list of all unguessed characters, pick a random one and replace the * in 
-        // censoredWord that has the random letter
-        // go through censoredword, and save the indices of all the remaining chars
-        // who are still *
         List<Integer> unguessedLettersIndices = new ArrayList<>();
         for (int i = 0; i < currentWord.getLength(); i++) {
             char currentLetter = currentWord.getCensoredVersion().charAt(i);
@@ -50,22 +49,19 @@ public class Mechanics {
             }
         }
         
-        // then, crossreference this with word, and add those letters to a set
+        
         List<Character> unguessedLettersList = new ArrayList<>();
         for (int i : unguessedLettersIndices) {
             char currentLetter = currentWord.toString().charAt(i);
             unguessedLettersList.add(currentLetter);
         }
         
-        // THEN, finally, randomly pick a letter, and then replace all indices in
-        // censoredword that contains that letter
+        
         Collections.shuffle(unguessedLettersList);
         int hintIndex = rand.nextInt(unguessedLettersList.size());
         char hint = unguessedLettersList.get(hintIndex);
         
-        // this method is void because i have decided to just change what censoredword looks like
-        // so ideally, giveHint will just "update" the screen, without needing the player
-        // to input the hint itself, wasting a try
+        
         char[] wordAsChars = currentWord.getWord().toCharArray();
         for (int i = 0; i < currentWord.getLength(); i++) {
             boolean wordIsHintChar = (wordAsChars[i] == hint); 
@@ -78,6 +74,12 @@ public class Mechanics {
         return "";
     }
     
+    /**
+     * Validates whether the char argument is in the word
+     * 
+     * @param guess 
+     * @return <code>true</code> if <code>guess</code> was correct
+     */
     public boolean guess(char guess) {
         guess = Character.toLowerCase(guess);
         pastGuesses.add(guess);

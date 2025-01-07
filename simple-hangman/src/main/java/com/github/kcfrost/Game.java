@@ -138,7 +138,7 @@ public class Game {
                     break;
                 
                 case "5":
-                    Scoreboard.display();
+                    Scoreboard.display(scan);
                     break;
             }
 
@@ -169,7 +169,7 @@ public class Game {
             
             // TODO maybe turn this into a method
             if (input.equals("S")) {
-                Scoreboard.display();
+                Scoreboard.display(scan);
             }
 
             if (input.equals(Choices.QUIT)) {

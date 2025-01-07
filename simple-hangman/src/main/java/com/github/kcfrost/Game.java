@@ -17,9 +17,9 @@ public class Game {
 
     public static void main(String[] args) {        
         Scanner scan = new Scanner(System.in);
+        boolean isGameOver = false;
 
         while (true) {    
-            boolean isGameOver = false;
             
             startUp();
             Screen.startMenu(wordLength, Mechanics.getDefinitionSwitch(), 
@@ -194,6 +194,7 @@ public class Game {
         wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
         mc = new Mechanics(wd);
         Hangman.restart();
+        System.out.println("RESTARTED");
     }
 
 }

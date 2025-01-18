@@ -43,7 +43,8 @@ public class Word {
     }
 
     private static Map<String, List<String>> makeMap() {
-        File file = new File("blank");
+        File file = new File("simple-hangman\\src\\main\\java\\com\\github\\kcfrost\\" +
+                            "wordutils\\example_words.txt");
 
         Map<String, List<String>> wordsMap = new HashMap<>();
         try {

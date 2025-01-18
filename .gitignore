@@ -36,5 +36,5 @@ buildNumber.properties
 
 # PROJECT SPECIFIC
 gifs/
-simple-hangman/src/main/java/com/github/kcfrost/utils/example_words.txt
-
+simple-hangman/src/main/java/wordutils/example_words.txt
+simple-hangman/src/main/java/wordutils/paths.txt

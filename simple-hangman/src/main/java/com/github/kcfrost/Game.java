@@ -5,9 +5,9 @@ import com.github.kcfrost.utils.Choices;
 import com.github.kcfrost.utils.Mechanics;
 import com.github.kcfrost.utils.Score;
 import com.github.kcfrost.utils.Scoreboard;
-import com.github.kcfrost.utils.Word;
 import com.github.kcfrost.visuals.Hangman;
 import com.github.kcfrost.visuals.Screen;
+import com.github.kcfrost.wordutils.Word;
 
 public class Game {
 

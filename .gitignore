@@ -36,5 +36,5 @@ buildNumber.properties
 
 # PROJECT SPECIFIC
 gifs/
-simple-hangman/src/main/java/wordutils/example_words.txt
-simple-hangman/src/main/java/wordutils/paths.txt
+**/example_words.txt
+**/paths.txt

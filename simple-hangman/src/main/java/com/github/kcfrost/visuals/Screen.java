@@ -1,7 +1,7 @@
 package com.github.kcfrost.visuals;
 
 import com.github.kcfrost.utils.Mechanics;
-import com.github.kcfrost.utils.Word;
+import com.github.kcfrost.wordutils.Word;
 
 public class Screen {
     private final static String ON = "On";

@@ -1,4 +1,4 @@
-package com.github.kcfrost.utils;
+package com.github.kcfrost.wordutils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -6,6 +6,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 
+import com.github.kcfrost.wordutils.Word;
+
 public class Mechanics {
     private static final int MAX_HINTS = 3;
 

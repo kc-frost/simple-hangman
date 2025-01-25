@@ -35,7 +35,7 @@ public class LocalWord extends Word {
 
     private static Map<String, List<String>> makeMap() {
         File file = new File("simple-hangman\\src\\main\\java\\com\\github\\kcfrost\\" +
-                            "\\wordutils\\example_words.txt");
+                            "\\wordutils\\xxample_words.txt");
 
         Map<String, List<String>> wordsMap = new HashMap<>();
         
@@ -57,8 +57,10 @@ public class LocalWord extends Word {
             }
 
             scan.close();
-        } catch (FileNotFoundException e) { // TODO Clean up FileNotFoundException
-            e.printStackTrace();
+        } catch (FileNotFoundException e) { 
+            System.out.println("\nFile named 'example_words.txt' not found!" + 
+                                " Did you change the file path?");
+            System.out.println("Check the LocalWord class. The game will end in the meantime!");
         }
     
         return wordsMap;

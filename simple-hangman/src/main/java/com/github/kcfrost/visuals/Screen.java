@@ -1,7 +1,7 @@
 package com.github.kcfrost.visuals;
 
 import com.github.kcfrost.utils.Mechanics;
-import com.github.kcfrost.wordutils.Word;
+import com.github.kcfrost.wordutils.LocalWord;
 
 public class Screen {
     private final static String ON = "On";
@@ -113,7 +113,7 @@ public class Screen {
         System.out.println("[Q]uit");
     }
 
-    public static void ingameMenu(Word wd, Mechanics mc, int hintsLeft) {
+    public static void ingameMenu(LocalWord wd, Mechanics mc, int hintsLeft) {
         System.out.println("CURRENT WORD");
         System.out.println(wd.getCensoredVersion());
 
@@ -125,7 +125,7 @@ public class Screen {
         System.out.println("[Q]uit");
     }
 
-    public static void endMenu(boolean status, Word wd, Mechanics mc) {
+    public static void endMenu(boolean status, LocalWord wd, Mechanics mc) {
         if (status) {
             winText();
         } else {

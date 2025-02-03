@@ -7,11 +7,11 @@ import com.github.kcfrost.utils.Score;
 import com.github.kcfrost.utils.Scoreboard;
 import com.github.kcfrost.visuals.Hangman;
 import com.github.kcfrost.visuals.Screen;
-import com.github.kcfrost.wordutils.Word;
+import com.github.kcfrost.wordutils.LocalWord;
 
 public class Game {
 
-    public static Word wd = new Word();
+    public static LocalWord wd = new LocalWord();
     public static Mechanics mc = new Mechanics(wd);
     public static int wordLength = wd.getLength();
 
@@ -191,7 +191,7 @@ public class Game {
     }
 
     public static void restartGame(int newWordLength) {
-        wd = new Word(newWordLength, Mechanics.getDefinitionSwitch());
+        wd = new LocalWord(newWordLength);
         mc = new Mechanics(wd);
         Hangman.restart();
     }

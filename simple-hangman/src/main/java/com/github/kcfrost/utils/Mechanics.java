@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 
-import com.github.kcfrost.wordutils.Word;
+import com.github.kcfrost.wordutils.LocalWord;
 
 public class Mechanics {
     private static final int MAX_HINTS = 3;
@@ -15,13 +15,13 @@ public class Mechanics {
     private static boolean hintSwitch = false;
     private static Random rand = new Random();
     
-    private Word currentWord;
+    private LocalWord currentWord;
     private LinkedHashSet<Character> pastGuesses;
     private int hintsLeft;
     private int attemptsCount;
 
 
-    public Mechanics(Word word) {
+    public Mechanics(LocalWord word) {
         currentWord = word;
         pastGuesses = new LinkedHashSet<>();
         hintsLeft = MAX_HINTS;
@@ -46,7 +46,7 @@ public class Mechanics {
         for (int i = 0; i < currentWord.getLength(); i++) {
             char currentLetter = currentWord.getCensoredVersion().charAt(i);
             
-            if (currentLetter == Word.getCensorSymbol()) {
+            if (currentLetter == LocalWord.getCensorSymbol()) {
                 unguessedLettersIndices.add(i);
             }
         }
@@ -123,7 +123,7 @@ public class Mechanics {
     
     public boolean gameState(int mistakesMade) {
         return (!String.valueOf(currentWord.getCensoredVersion())
-        .contains(String.valueOf(Word.getCensorSymbol())) || mistakesMade == 7);
+        .contains(String.valueOf(LocalWord.getCensorSymbol())) || mistakesMade == 7);
     }
     
     public boolean gameResult(int mistakesMade) {

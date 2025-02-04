@@ -13,15 +13,13 @@ import java.util.Scanner;
 public class LocalWord extends Word {
     public LocalWord() {
         word = generateWordFromLocal(getDefaultWordLength());
-        censoredWord = new StringBuilder(String.valueOf(getCensorSymbol())
-                                                .repeat(this.getLength()));
+        censoredWord = setCensoredWord();
 
     }
     
     public LocalWord(int wordLength) {
         word = generateWordFromLocal(wordLength);
-        censoredWord = new StringBuilder(String.valueOf(getCensorSymbol())
-                                                .repeat(this.getLength()));
+        censoredWord = setCensoredWord();
     }
 
     private static String generateWordFromLocal(int wordLength) {

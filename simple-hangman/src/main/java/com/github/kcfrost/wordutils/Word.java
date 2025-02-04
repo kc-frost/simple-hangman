@@ -8,6 +8,11 @@ public abstract class Word {
     public StringBuilder censoredWord;
     public String definition;
 
+    public StringBuilder setCensoredWord() {
+        return new StringBuilder(String.valueOf(getCensorSymbol())
+                .repeat(this.getLength()));
+    }
+
     public static char getCensorSymbol() {
         return CENSOR_SYMBOL;
     }

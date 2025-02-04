@@ -1,13 +1,16 @@
 package com.github.kcfrost.wordutils;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.time.Duration;
 import java.util.Map;
 
-import org.apache.http.HttpRequest;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
+import org.json.JSONArray;
 
 public class APIWord extends Word {
     private static final char LETTER_SYMBOL = '?'; 
@@ -18,9 +21,21 @@ public class APIWord extends Word {
     }
     
     private String generateWord() {
-            // method to generate the whole http process thing
+        // method to generate the whole http process thing
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .GET()
+            .uri(generateURI())
+            .timeout(Duration.ofSeconds(30))
+            .build();
 
-            return null;
+        try {
+            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
     }
 
     private URI generateURI() {
@@ -42,7 +57,7 @@ public class APIWord extends Word {
     private String generateWordPattern() {
         // tentative method name, not a fan of how it sounds
         // method to generate the latter half of the uri (paramString)
-        
+
         return null;
     }
     

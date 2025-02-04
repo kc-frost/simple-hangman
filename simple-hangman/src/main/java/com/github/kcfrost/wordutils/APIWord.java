@@ -16,31 +16,35 @@ public class APIWord extends Word {
         word = "hello"; // PLACEHOLDER
         censoredWord = setCensoredWord();
     }
+    
+    private String generateWord() {
+            // method to generate the whole http process thing
+
+            return null;
+    }
+
+    private URI generateURI() {
+        // method to generate uri
+        URI uri = null;
+        try {
+            uri = new URIBuilder("https://api.datamuse.com/words?")
+                        .addParameter("sp", generateWordPattern())
+                        .build();
+            
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return uri;
+
+    }
 
     private String generateWordPattern() {
         // tentative method name, not a fan of how it sounds
         // method to generate the latter half of the uri (paramString)
         
+        return null;
     }
-
-    private URI generateURI(String paramString) {
-        // method to generate uri
-        try {
-            URI uri = new URIBuilder("https://api.datamuse.com/words?")
-                        .addParameter("sp", paramString)
-                        .build();
-
-            return uri;
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String generateWord() {
-        // method to generate the whole http process thing
-
-    }
-
     
 }
 

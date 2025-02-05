@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 import java.util.Map;
+import java.util.Random;
 
 import org.json.JSONArray;
 
@@ -16,7 +17,7 @@ public class APIWord extends Word {
     private static final char LETTER_SYMBOL = '?'; 
 
     public APIWord() {
-        word = "hello"; // PLACEHOLDER
+        word = generateWord(); // PLACEHOLDER
         censoredWord = setCensoredWord();
     }
     
@@ -25,7 +26,7 @@ public class APIWord extends Word {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .GET()
-            .uri(generateURI())
+            .uri(URI.create(generateURI()))
             .timeout(Duration.ofSeconds(30))
             .build();
 
@@ -38,27 +39,33 @@ public class APIWord extends Word {
         return null;
     }
 
-    private URI generateURI() {
-        // method to generate uri
-        URI uri = null;
-        try {
-            uri = new URIBuilder("https://api.datamuse.com/words?")
-                        .addParameter("sp", generateWordPattern())
-                        .build();
-            
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+    private String generateURI() {
+        StringBuilder uri = new StringBuilder("https://api.datamuse.com/words?sp=");
+        Random rd = new Random();
+        
+        // set length
+        StringBuilder parameterValue = new StringBuilder();
+        parameterValue.append("?".repeat(7));
+
+        // select letter
+        String abc = "abcdefghijklmnopqrstuvwxyz";
+        char letter = abc.charAt(rd.nextInt(abc.length()));
+
+        // pick pattern
+        String[] pattern = {"*n*", "*n", "n*"};
+        char[] newPattern = (pattern[rd.nextInt(pattern.length)]).toCharArray();
+        for (int i = 0; i < newPattern.length; i++) {
+            if (newPattern[i] == 'n') {
+                newPattern[i] = letter;
+            }
         }
+        
+        parameterValue.append("," + new String(newPattern));
 
-        return uri;
+        // add to uri
+        uri.append(parameterValue);
 
-    }
-
-    private String generateWordPattern() {
-        // tentative method name, not a fan of how it sounds
-        // method to generate the latter half of the uri (paramString)
-
-        return null;
+        return uri.toString();
     }
     
 }

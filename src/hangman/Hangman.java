@@ -30,6 +30,12 @@ public class Hangman {
             System.out.print("\nEnter guess: ");
             String guess = scan.nextLine();
 
+            while (guess.length() != 1) {
+                System.out.println("\nGuess can only be 1 character at a time");
+                System.out.print("Enter guess: ");
+                guess = scan.nextLine();
+            }
+
             if (word.contains(guess)) {
                 guesses.set(word.indexOf(guess), guess);
                 System.out.println();

@@ -19,7 +19,6 @@ public class Words {
     static String[] getLength4Words = new String[]{"book","tree","lamp","door","road",
                 "wind","star","milk","fish","snow"};
 
-
     static String[] getLength5Words = new String[]{"apple","grape","chair","table","brick",
                 "plane","mouse","river","light","stone"};
 

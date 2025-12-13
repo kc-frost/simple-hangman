@@ -37,7 +37,8 @@ public class Hangman {
             }
 
             if (word.contains(guess)) {
-                guesses.set(word.indexOf(guess), guess);
+                int lastBlankIndex = guesses.indexOf("_");
+                guesses.set(word.indexOf(guess, lastBlankIndex), guess);
                 System.out.println();
             } else {
                 remainingTries--;

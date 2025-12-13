@@ -21,24 +21,30 @@ public class Hangman {
             guesses.add("_");
         }
 
-        System.out.println(wordLength);
-        System.out.println(word);
-
         int remainingTries = 7;
         while (guesses.contains("_") && remainingTries != 0) {
-            System.out.print("Enter guess: ");
+            for (int i = 0; i < wordLength; i++) {
+                System.out.print(guesses.get(i));
+            }
+
+            System.out.print("\nEnter guess: ");
             String guess = scan.nextLine();
+
             if (word.contains(guess)) {
                 guesses.set(word.indexOf(guess), guess);
+                System.out.println();
             } else {
                 remainingTries--;
                 System.out.println("Wrong guess! " + remainingTries + " tries remaining.\n");
             }
         }
 
-        for  (int i = 0; i < wordLength; i++) {
-            System.out.print(guesses.get(i));
+        if (remainingTries == 0) {
+            System.out.println("You lost!");
+        } else {
+            System.out.println("You won!");
         }
+        System.out.println("The word was: " + word);
 
     }
 }
